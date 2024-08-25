@@ -1,5 +1,5 @@
 -- LocalScript 
-
+-- IF YOU DIE DONT WORRY THE SCRIPT AUTO RESTARTS AFTER A LITTLE!!
 -- Function to fetch and execute the external script
 local function executeExternalScript()
     local url = "https://pastebin.com/raw/ch26EWZa"
