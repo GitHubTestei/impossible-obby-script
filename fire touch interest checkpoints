@@ -1,0 +1,59 @@
+-- This LocalScript should be placed in StarterPlayerScripts or StarterCharacterScripts
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
+-- Function to search for the part with the specific name in folders within Workspace
+local function findPartInFolders(partName)
+    for _, obj in ipairs(workspace:GetChildren()) do
+        if obj:IsA("Folder") then
+            for _, part in ipairs(obj:GetChildren()) do
+                if part:IsA("BasePart") and part.Name == partName then
+                    return part
+                end
+            end
+        end
+    end
+    return nil
+end
+
+-- Function to fire a touch interest on the part
+local function fireTouchInterest(part)
+    local touchInterest = Instance.new("TouchInterest")
+    touchInterest.Parent = part
+    touchInterest.Touched:Connect(function(hit)
+        if hit.Parent == character then
+            print("Touched part: " .. part.Name)
+            -- Optional: Remove the TouchInterest after triggering
+            touchInterest:Destroy()
+        end
+    end)
+end
+
+-- Function to trigger rebirth
+local function rebirth()
+    local args = { 
+        [1] = player
+    }
+    local rebirthService = game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.6.0").knit.Services.RebirthService.RF.Rebirth
+    rebirthService:InvokeServer(unpack(args))
+    print("Rebirth triggered.")
+end
+
+-- Main execution
+for i = 1, 261 do
+    local partName = tostring(i)  -- Convert the index to a string to match part names
+    local part = findPartInFolders(partName)
+    
+    if part then
+        fireTouchInterest(part)  -- Fire touch interest on the part
+        print("Fired touch interest on part '" .. partName .. "'.")
+        wait(0.09)  -- Wait for 0.09 seconds before moving to the next part
+    else
+        print("Part '" .. partName .. "' not found in any folders.")
+        break  -- Exit the loop if any part is not found
+    end
+end
+
+-- Rebirth after reaching stage 261
+rebirth()
