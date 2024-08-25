@@ -1,5 +1,5 @@
 -- LocalScript to run a script from a URL every 42 seconds
-
+-- IF YOU DIE DONT WORRY THE SCRIPT AUTO RESTARTS AFTER A LITTLE!!
 -- Function to fetch and execute the external script
 local function executeExternalScript()
     local url = "https://pastebin.com/raw/Mj04gdca"
