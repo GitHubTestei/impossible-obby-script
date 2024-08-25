@@ -1,0 +1,57 @@
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
+-- Function to search for the part with the specific name in folders within Workspace
+local function findPartInFolders(partName)
+    for _, obj in ipairs(workspace:GetChildren()) do
+        if obj:IsA("Folder") then
+            for _, part in ipairs(obj:GetChildren()) do
+                if part:IsA("BasePart") and part.Name == partName then
+                    return part
+                end
+            end
+        end
+    end
+    return nil
+end
+
+-- Function to simulate touching the part
+local function simulateTouch(part)
+    local touchPart = Instance.new("Part")
+    touchPart.Size = Vector3.new(1, 1, 1) -- Size doesn't matter
+    touchPart.Position = part.Position
+    touchPart.Anchored = true
+    touchPart.CanCollide = false
+    
+    -- Create a touch event connection
+    local touchConnection
+    touchConnection = part.Touched:Connect(function(hit)
+        if hit.Parent == character then
+            -- Assuming that touching the part sets a checkpoint
+            -- You can replace this part with the actual checkpoint setting logic
+            print("Checkpoint set at part '" .. part.Name .. "'.")
+            
+            -- Clean up
+            touchConnection:Disconnect()
+            touchPart:Destroy()
+        end
+    end)
+    
+    -- Place the touch part at the same position as the target part
+    touchPart.Parent = workspace
+    wait(0.1) -- Give it a short moment to ensure the touch event can be processed
+    touchPart:Destroy() -- Clean up after the simulation
+end
+
+-- Main execution
+local partName = "6"  -- Specify the part name directly
+local part = findPartInFolders(partName)
+
+if part then
+    -- Simulate the touch event
+    simulateTouch(part)
+    print("Simulated touch on part '" .. partName .. "'.")
+else
+    print("Part '" .. partName .. "' not found in any folders.")
+end
