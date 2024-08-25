@@ -1,0 +1,19 @@
+-- LocalScript 
+
+-- Function to fetch and execute the external script
+local function executeExternalScript()
+    local url = "https://pastebin.com/raw/ch26EWZa"
+    local success, result = pcall(function()
+        return loadstring(game:HttpGet(url))()
+    end)
+
+    if not success then
+        warn("Failed to execute the external script: " .. tostring(result))
+    end
+end
+
+-- Main loop 
+while true do
+    executeExternalScript()
+    wait(1)  -- Wait 
+end
