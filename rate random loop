@@ -1,0 +1,52 @@
+-- Function to load and execute a script from a URL
+local function executeScript(url)
+    local success, result = pcall(function()
+        return loadstring(game:HttpGet(url))()
+    end)
+    if not success then
+        warn("Failed to load or execute script from " .. url .. ": " .. result)
+    end
+end
+
+-- Function to execute scripts with a delay between each
+local function executeScriptsWithDelay(urls, delay)
+    for _, url in ipairs(urls) do
+        spawn(function()
+            executeScript(url)
+        end)
+        wait(delay)  -- Wait for the specified delay before executing the next script
+    end
+end
+
+-- URLs of the scripts to be executed
+local urls = {
+    "https://raw.githubusercontent.com/GitHubTestei/impossible-obby-script/main/rate%20random%20ahh%20stages%20lol",
+    "https://raw.githubusercontent.com/GitHubTestei/impossible-obby-script/main/rate%20random%20ahh%20stages%20lol",
+    "https://raw.githubusercontent.com/GitHubTestei/impossible-obby-script/main/rate%20random%20ahh%20stages%20lol",
+    "https://raw.githubusercontent.com/GitHubTestei/impossible-obby-script/main/rate%20random%20ahh%20stages%20lol",
+    "https://raw.githubusercontent.com/GitHubTestei/impossible-obby-script/main/rate%20random%20ahh%20stages%20lol",
+    "https://raw.githubusercontent.com/GitHubTestei/impossible-obby-script/main/rate%20random%20ahh%20stages%20lol",
+    "https://raw.githubusercontent.com/GitHubTestei/impossible-obby-script/main/rate%20random%20ahh%20stages%20lol",
+    "https://raw.githubusercontent.com/GitHubTestei/impossible-obby-script/main/rate%20random%20ahh%20stages%20lol",
+    "https://raw.githubusercontent.com/GitHubTestei/impossible-obby-script/main/rate%20random%20ahh%20stages%20lol",
+    "https://raw.githubusercontent.com/GitHubTestei/impossible-obby-script/main/rate%20random%20ahh%20stages%20lol",
+    "https://raw.githubusercontent.com/GitHubTestei/impossible-obby-script/main/rate%20random%20ahh%20stages%20lol",
+    "https://raw.githubusercontent.com/GitHubTestei/impossible-obby-script/main/rate%20random%20ahh%20stages%20lol",
+    "https://raw.githubusercontent.com/GitHubTestei/impossible-obby-script/main/rate%20random%20ahh%20stages%20lol",
+    "https://raw.githubusercontent.com/GitHubTestei/impossible-obby-script/main/rate%20random%20ahh%20stages%20lol",
+    "https://raw.githubusercontent.com/GitHubTestei/impossible-obby-script/main/rate%20random%20ahh%20stages%20lol",
+    "https://raw.githubusercontent.com/GitHubTestei/impossible-obby-script/main/rate%20random%20ahh%20stages%20lol",
+    "https://raw.githubusercontent.com/GitHubTestei/impossible-obby-script/main/rate%20random%20ahh%20stages%20lol",
+    "https://raw.githubusercontent.com/GitHubTestei/impossible-obby-script/main/rate%20random%20ahh%20stages%20lol",
+    "https://raw.githubusercontent.com/GitHubTestei/impossible-obby-script/main/rate%20random%20ahh%20stages%20lol",
+    "https://raw.githubusercontent.com/GitHubTestei/impossible-obby-script/main/rate%20random%20ahh%20stages%20lol",
+    "https://raw.githubusercontent.com/GitHubTestei/impossible-obby-script/main/rate%20random%20ahh%20stages%20lol",
+    "https://raw.githubusercontent.com/GitHubTestei/impossible-obby-script/main/rate%20random%20ahh%20stages%20lol",
+    "https://raw.githubusercontent.com/GitHubTestei/impossible-obby-script/main/rate%20random%20ahh%20stages%20lol",
+    "https://raw.githubusercontent.com/GitHubTestei/impossible-obby-script/main/rate%20random%20ahh%20stages%20lol",
+    "https://raw.githubusercontent.com/GitHubTestei/impossible-obby-script/main/rate%20random%20ahh%20stages%20lol",
+    "https://raw.githubusercontent.com/GitHubTestei/impossible-obby-script/main/rate%20random%20ahh%20stages%20lol"
+}
+
+-- Execute scripts with a 0.1 second delay between each
+executeScriptsWithDelay(urls, 0.1)
